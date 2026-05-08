@@ -7,7 +7,7 @@ from adjustText import adjust_text
 import textwrap
 
 # Bangalore weather aesthetic: warm beige, Tufte minimalism, no chart junk
-BG = '#e5e1d8'
+BG = '#ffffff'
 SUBTLE = '#c8c0aa'
 MID = '#9c9280'
 ACCENT = '#5f3946'
@@ -75,7 +75,7 @@ foods = [
 def gi_to_x(gi):
     return 10 - (gi / 5)  # GI 0 -> +10, GI 50 -> 0, GI 100 -> -10
 
-fig, ax = plt.subplots(figsize=(28, 20))
+fig, ax = plt.subplots(figsize=(36, 26))
 
 # Tufte: warm background, no chart junk
 fig.patch.set_facecolor(BG)
@@ -86,7 +86,9 @@ ax.spines['left'].set_linewidth(0.3)
 ax.spines['bottom'].set_linewidth(0.3)
 ax.spines['left'].set_color(TEXT)
 ax.spines['bottom'].set_color(TEXT)
-ax.tick_params(colors=TEXT, labelsize=16, length=0)
+ax.tick_params(colors=TEXT, labelsize=22, length=0)
+ax.set_xticks([])
+ax.set_yticks([])
 ax.grid(False)
 
 # Subtle quadrant dividers instead of colored fills
@@ -96,17 +98,17 @@ ax.axvline(x=0, color=SUBTLE, linewidth=0.8)
 # GI zone markers - subtle vertical references
 ax.axvline(x=gi_to_x(55), color=MID, linewidth=0.5, linestyle=':', alpha=0.5)
 ax.axvline(x=gi_to_x(70), color=MID, linewidth=0.5, linestyle=':', alpha=0.5)
-ax.text(gi_to_x(55) + 0.2, -10.2, "Low GI (<55)", fontsize=14, color=MID)
-ax.text(gi_to_x(70) - 4.5, -10.2, "High GI (>70)", fontsize=14, color=MID)
+ax.text(gi_to_x(55) + 0.2, -10.2, "Low GI (<55)", fontsize=18, color=MID)
+ax.text(gi_to_x(70) - 4.5, -10.2, "High GI (>70)", fontsize=18, color=MID)
 
 # Quadrant labels - muted, unobtrusive
-ax.text(-7, 10, "DELICIOUS POISON", fontsize=20, fontweight='bold',
+ax.text(-7, 10, "DELICIOUS POISON", fontsize=28, fontweight='bold',
         color=ACCENT, alpha=0.35, ha='center')
-ax.text(7.5, 10, "THE PROMISED LAND", fontsize=20, fontweight='bold',
+ax.text(7.5, 10, "THE PROMISED LAND", fontsize=28, fontweight='bold',
         color='#6b8f71', alpha=0.35, ha='center')
-ax.text(-7, -9.2, "WHY DOES THIS EXIST?", fontsize=20, fontweight='bold',
+ax.text(-7, -9.2, "WHY DOES THIS EXIST?", fontsize=28, fontweight='bold',
         color=MID, alpha=0.4, ha='center')
-ax.text(7.5, -9.2, "VIRTUOUS SUFFERING", fontsize=20, fontweight='bold',
+ax.text(7.5, -9.2, "VIRTUOUS SUFFERING", fontsize=28, fontweight='bold',
         color=MID, alpha=0.4, ha='center')
 
 np.random.seed(7)
@@ -122,23 +124,23 @@ for name, gi, enjoy, cat in foods:
         ax.scatter(x, y, c=ACCENT, s=140, marker='s', alpha=0.9,
                    edgecolors=ACCENT, linewidth=0.8, zorder=10)
         label = textwrap.fill(name, 10)
-        texts.append(ax.text(x, y, label, fontsize=22, color=ACCENT,
+        texts.append(ax.text(x, y, label, fontsize=24, color=ACCENT,
                              fontweight='bold', ha='left', va='center'))
     else:
         ax.scatter(x, y, c=MID, s=100, marker='o', alpha=0.7,
                    edgecolors=BG, linewidth=0.5, zorder=5)
         label = textwrap.fill(name, 10)
-        texts.append(ax.text(x, y, label, fontsize=20, color=TEXT,
+        texts.append(ax.text(x, y, label, fontsize=22, color=TEXT,
                              fontweight='normal', ha='left', va='center'))
 
 # Repel overlapping labels (like ggrepel)
 adjust_text(texts, ax=ax,
             arrowprops=dict(arrowstyle='-', color=MID, alpha=0.4, lw=0.8),
-            expand=(3.0, 3.0),
-            force_text=(3.0, 3.0),
-            force_points=(2.0, 2.0),
-            force_objects=(2.0, 2.0),
-            ensure_inside_axes=False,
+            expand=(1.5, 1.5),
+            force_text=(1.5, 1.5),
+            force_points=(1.0, 1.0),
+            force_objects=(1.0, 1.0),
+            ensure_inside_axes=True,
             iterations=500)
 
 # Legend - minimal, Tufte-style
@@ -148,20 +150,20 @@ h1 = plt.Line2D([0], [0], marker='s', color='none', markerfacecolor=ACCENT,
 h2 = plt.Line2D([0], [0], marker='o', color='none', markerfacecolor=MID,
                 markersize=10, markeredgecolor=BG, markeredgewidth=0.5,
                 label='Everything Else')
-legend = ax.legend(handles=[h1, h2], loc='lower left', fontsize=16,
+legend = ax.legend(handles=[h1, h2], loc='lower left', fontsize=20,
                    frameon=False, labelcolor=TEXT)
 
 # Axis labels
 ax.set_xlabel("← High Glycemic Index (Spike)          Low Glycemic Index (Safe) →",
-              fontsize=18, fontweight='bold', color=TEXT, labelpad=16)
+              fontsize=24, fontweight='bold', color=TEXT, labelpad=16)
 ax.set_ylabel("← Nobody Wants This          Everyone Fights Over It →",
-              fontsize=18, fontweight='bold', color=TEXT, labelpad=16)
+              fontsize=24, fontweight='bold', color=TEXT, labelpad=16)
 
 # Title
 ax.set_title("The South Indian Vegetarian Food Problem",
-             fontsize=28, fontweight='bold', color=TEXT, pad=10, loc='left')
+             fontsize=36, fontweight='bold', color=TEXT, pad=10, loc='left')
 ax.text(0, 1.03, "Real Glycemic Index Data vs. Enjoyability — Vegetarian Foods Only",
-        transform=ax.transAxes, fontsize=16, color=ACCENT, ha='left')
+        transform=ax.transAxes, fontsize=22, color=ACCENT, ha='left')
 
 ax.set_xlim(-11, 11)
 ax.set_ylim(-11, 11)
@@ -171,7 +173,7 @@ ax.set_aspect('equal')
 fig.text(0.5, 0.005,
          "GI Sources: PMC9304465 (South Indian Breakfast Foods, 2022)  ·  PMC7270244 (Millet Foods)  ·  "
          "glycemic-index.net  ·  University of Sydney GI Database  ·  Harvard Health GI Tables",
-         ha='center', fontsize=11, color=MID, style='italic')
+         ha='center', fontsize=14, color=MID, style='italic')
 
 plt.tight_layout(rect=[0, 0.025, 1, 0.97])
 plt.savefig("/Users/Karthik/Documents/work/south-indian-food-2x2/south-indian-food-2x2.png",
