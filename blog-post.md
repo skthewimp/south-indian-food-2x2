@@ -41,3 +41,7 @@ I'm not saying this as some kind of cultural indictment. This is the food I grew
 Other cuisines simply don't force this trade-off on you. A Mediterranean meal, a Japanese meal, even a North Indian non-veg meal - these give you options that are both enjoyable and reasonably safe for blood sugar. The SI vegetarian festival spread doesn't.
 
 The 2x2 makes this painfully clear. Every red square is either left of center (high GI) or below the x-axis (not enjoyable) or both. The blue dots from other cuisines spread comfortably across all four quadrants. That clustering isn't an accident - it's the consequence of a cuisine that was built around rice and jaggery in a world that didn't know what insulin resistance was.
+
+## A note on the axes
+
+I dropped the numeric tick labels from both axes. The GI numbers are real (cited below the chart), but the enjoyability scores are subjective - I assigned them based on general consensus and my own read of food preference data. Showing them as precise numbers on a -10 to +10 scale implied a precision that doesn't exist. The relative positions are what matter; the exact coordinates would just be false confidence.

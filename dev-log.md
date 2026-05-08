@@ -54,6 +54,12 @@ Rescaling formula for TasteAtlas: `enjoy = (rating - 2.5) * 4` maps the 0-5 Tast
 - **GI-to-x transform**: `x = 10 - (gi / 5)` puts GI 0 at +10 (right/safe) and GI 100 at -10 (left/bad).
 - **coord_fixed()**: Equal aspect ratio so the quadrants are visually balanced.
 
+### 14. Readability pass
+Rendered chart had two problems: warm beige background looked muddy at small sizes, and labels were hard to read. Switched background to white, bumped figure size to 36x26, increased label/title/quadrant fonts, and tuned adjustText with `ensure_inside_axes=True` to keep all labels on canvas.
+
+### 15. Drop tick numbers
+Removed numeric tick labels on both axes. The GI x-axis values were real but the enjoyability y-axis was subjective - showing precise numbers implied a false precision. Relative position is what matters.
+
 ## Data sources
 - GI: PMC9304465, PMC7270244, glycemic-index.net, University of Sydney GI Database
 - Enjoyability: TasteAtlas ratings (rescaled), YouGov food preference surveys
