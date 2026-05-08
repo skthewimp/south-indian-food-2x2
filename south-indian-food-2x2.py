@@ -143,15 +143,8 @@ adjust_text(texts, ax=ax,
             ensure_inside_axes=True,
             iterations=500)
 
-# Legend - minimal, Tufte-style
-h1 = plt.Line2D([0], [0], marker='s', color='none', markerfacecolor=ACCENT,
-                markersize=11, markeredgecolor=ACCENT, markeredgewidth=0.8,
-                label='South Indian Veg (Festival)')
-h2 = plt.Line2D([0], [0], marker='o', color='none', markerfacecolor=MID,
-                markersize=10, markeredgecolor=BG, markeredgewidth=0.5,
-                label='Everything Else')
-legend = ax.legend(handles=[h1, h2], loc='lower left', fontsize=20,
-                   frameon=False, labelcolor=TEXT)
+# No legend — categories direct-labeled via marker color (maroon = SI festival, grey = other)
+# and called out in the subtitle.
 
 # Axis labels
 ax.set_xlabel("← High Glycemic Index (Spike)          Low Glycemic Index (Safe) →",
@@ -162,7 +155,7 @@ ax.set_ylabel("← Nobody Wants This          Everyone Fights Over It →",
 # Title
 ax.set_title("The South Indian Vegetarian Food Problem",
              fontsize=36, fontweight='bold', color=TEXT, pad=10, loc='left')
-ax.text(0, 1.03, "Real Glycemic Index Data vs. Enjoyability — Vegetarian Foods Only",
+ax.text(0, 1.03, "Real Glycemic Index Data vs. Enjoyability  ·  South Indian festival food in maroon, everything else in grey",
         transform=ax.transAxes, fontsize=22, color=ACCENT, ha='left')
 
 ax.set_xlim(-11, 11)
